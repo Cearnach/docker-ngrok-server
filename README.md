@@ -75,4 +75,4 @@ ngrok.exe -subdomain=test -config=ngrok.cfg 8090 子域名就是主机名,配置
 ## 注意事项
 ---
 1. 每次启动一个新的容器时，会生成配套的ngrok服务端和客户端。所以如果重新启动一个新的容器，需要重新拷贝新的ngrok客户端出来。启动已有的容器不用更新ngrok客户端。
-![info](https://github.com/Cearnach/docker-ngrok-server/blob/master/files/ngrok-cfg.jpg)
+![info](https://github.com/Cearnach/docker-ngrok-server/blob/master/files/ngrok-config.jpg)
