@@ -22,10 +22,20 @@ docker run -d --name ngrok-server -p 主机http端口:容器http端口 -p 主机
 
 例如:
 docker run -d --name ngrok-server -p 80:80 -p 8082:8082 -p 443:443 jueying/ngrok-server mydomain.cn 80 8082 443
+或者  
+docker run -d --name ngrok-server -p 19080:19080 -p 8082:8082 -p 443:443 jueying/ngrok-server ruanx.club 19080 8082 443  
+
 ```
 运行时需要一些时间编译生成ngrok服务端和客户端，通过以下代码查看日志
 ```
-docker logs ngrok-server
+查看所有 ngrok-server 的日志  
+docker logs ngrok-server  
+
+实时查看docker容器日志
+sudo docker logs -f -t --tail 行数 容器名  
+
+例：实时查看docker容器名为s12的最后10行日志  
+sudo docker logs -f -t --tail 10 s12  
 ```
 当出现以下日志时表示启动成功
 ![info](https://raw.githubusercontent.com/jueying/docker-ngrok-server/master/files/ngrokd_start.jpg)
@@ -45,11 +55,19 @@ docker cp ngrok-server:/usr/local/ngrok/bin/ /tmp/
 ```
 server_addr: "你的域名:隧道端口"
 trust_host_root_certs: false
+
+例如:  
+server_addr: "ruanx.club:443"  
+trust_host_root_certs: false  
 ```
+
 将your_domain和tunnel_port换成自己启动容器时设置的值
 windows平台通过以下命令启动:
 ```
 ngrok.exe -subdomain=子域名 -config=ngrok.cfg 本地端口
+
+例如
+ngrok.exe -subdomain=test -config=ngrok.cfg 8090 子域名就是主机名,配置后就可以通过 test.ruanx.club 访问服务器了.
 ```
 可以在files文件夹中[下载](https://github.com/jueying/docker-ngrok-server/blob/master/files/ngrok-client.rar)我的ngrok客户端配置，然后修改你的域名，并替换为你的ngrok客户端。
 
